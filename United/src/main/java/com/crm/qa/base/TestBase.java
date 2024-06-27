@@ -1,5 +1,6 @@
 package com.crm.qa.base;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -8,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
@@ -44,14 +46,29 @@ public class TestBase {
 			 String chromeDriverPath = System.getenv("chromium") != null ? System.getenv("chromium") : "/usr/local/bin/chromedriver";
 			 System.out.println("Using ChromeDriver path: " + chromeDriverPath);
 	         System.setProperty("webdriver.chrome.driver", chromeDriverPath);
+	         
+	         ChromeDriverService service = new ChromeDriverService.Builder()
+	                    .usingDriverExecutable(new File(chromeDriverPath))
+	                    .usingAnyFreePort()
+	                    .withVerbose(true)
+	                    .build();
 			
-		    /*ChromeOptions options = new ChromeOptions();
-			options.addArguments("--headless");
-			options.addArguments("--no-sandbox");
-			options.addArguments("--disable-dev-shm-usage");
-			options.addArguments("--disable-gpu");
-			options.addArguments("--window-size=1920,1080");*/
-			Driver=new ChromeDriver();
+		    ChromeOptions options = new ChromeOptions();
+		    options.addArguments("--headless");
+            options.addArguments("--no-sandbox");
+            options.addArguments("--disable-dev-shm-usage");
+            options.addArguments("--disable-gpu");
+            options.addArguments("--window-size=1920,1080");
+            options.addArguments("--remote-debugging-port=9222");
+            options.addArguments("--disable-extensions");
+            options.addArguments("--whitelisted-ips=''");
+            options.addArguments("--disable-software-rasterizer");
+            options.addArguments("--disable-translate");
+            options.addArguments("--disable-background-timer-throttling");
+            options.addArguments("--disable-backgrounding-occluded-windows");
+            options.addArguments("--disable-renderer-backgrounding");
+            
+			Driver=new ChromeDriver(service, options);
 		//}else if(browserName.equals("FF")) {
 			//System.setProperty("webdriver.firefox.driver", "C:\\geckodriver\\geckodriver.exe");
 			 //String geckoDriverPath = System.getenv("GECKO_DRIVER") != null ? System.getenv("GECKO_DRIVER") : "path/to/default/geckodriver";
