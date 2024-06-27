@@ -45,13 +45,13 @@ public class TestBase {
 			 System.out.println("Using ChromeDriver path: " + chromeDriverPath);
 	         System.setProperty("webdriver.chrome.driver", chromeDriverPath);
 			
-		    ChromeOptions options = new ChromeOptions();
+		    /*ChromeOptions options = new ChromeOptions();
 			options.addArguments("--headless");
 			options.addArguments("--no-sandbox");
 			options.addArguments("--disable-dev-shm-usage");
 			options.addArguments("--disable-gpu");
-			options.addArguments("--window-size=1920,1080");
-			Driver=new ChromeDriver(options);
+			options.addArguments("--window-size=1920,1080");*/
+			Driver=new ChromeDriver();
 		//}else if(browserName.equals("FF")) {
 			//System.setProperty("webdriver.firefox.driver", "C:\\geckodriver\\geckodriver.exe");
 			 //String geckoDriverPath = System.getenv("GECKO_DRIVER") != null ? System.getenv("GECKO_DRIVER") : "path/to/default/geckodriver";
