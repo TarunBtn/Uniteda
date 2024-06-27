@@ -42,6 +42,7 @@ public class TestBase {
 		if(browserName.equals("chrome")) {
 			//System.setProperty("webdriver.chrome.driver", "C:\\chromedriver\\chromedriver.exe");
 			 String chromeDriverPath = System.getenv("chromium") != null ? System.getenv("chromium") : "/usr/bin/chromium-browser";
+			 System.out.println("Using ChromeDriver path: " + chromeDriverPath);
 	         System.setProperty("webdriver.chrome.driver", chromeDriverPath);
 			
 		    ChromeOptions options = new ChromeOptions();
@@ -56,13 +57,16 @@ public class TestBase {
 			 String geckoDriverPath = System.getenv("GECKO_DRIVER") != null ? System.getenv("GECKO_DRIVER") : "path/to/default/geckodriver";
 	         System.setProperty("webdriver.gecko.driver", geckoDriverPath);
 			 Driver=new FirefoxDriver();
-		}
+		} else {
+            throw new Exception("Browser not supported: " + browserName);
+        }
 	
 		//Driver=new ChromeDriver();
 		Driver.manage().window().maximize();
 		Driver.manage().deleteAllCookies();
 		Driver.manage().timeouts().pageLoadTimeout(TestUtil.PAGE_LOAD_TIMEOUT, TimeUnit.SECONDS);
 		Driver.manage().timeouts().implicitlyWait(TestUtil.IMPLICIT_WAIT, TimeUnit.SECONDS);
+		String url = prop.getProperty("url");
 		Thread.sleep(2000);
 		Driver.get(prop.getProperty("url"));
 		Thread.sleep(2000);
