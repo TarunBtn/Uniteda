@@ -41,7 +41,7 @@ public class TestBase {
 		String browserName=prop.getProperty("browser");
 		if(browserName.equals("chrome")) {
 			//System.setProperty("webdriver.chrome.driver", "C:\\chromedriver\\chromedriver.exe");
-			 String chromeDriverPath = System.getenv("chromium") != null ? System.getenv("chromium") : "/usr/bin/chromium-browser";
+			 String chromeDriverPath = System.getenv("chromium") != null ? System.getenv("chromium") : "/usr/local/bin/chromedriver";
 			 System.out.println("Using ChromeDriver path: " + chromeDriverPath);
 	         System.setProperty("webdriver.chrome.driver", chromeDriverPath);
 			
