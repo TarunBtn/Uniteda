@@ -55,7 +55,7 @@ public class TestBase {
 	                    .usingAnyFreePort()
 	                    .withVerbose(true)
 	                    .build();
-	        WebDriverManager.chromedriver().setup();
+	        //WebDriverManager.chromedriver().setup();
 		    ChromeOptions options = new ChromeOptions();
 		    options.addArguments("--headless");
             options.addArguments("--no-sandbox");
